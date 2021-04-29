@@ -1,4 +1,4 @@
-<#import "parts/common.ftl" as c>
+<#import "parts/common.ftlh" as c>
 
 <@c.page>
     List of users
@@ -14,8 +14,7 @@
         <tbody>
         <#list users as user>
             <tr>
-<#--            <td>${user.username}</td>-->
-                <td>${user.username!"null or missing"}</td>
+                <td>${user.username}</td>
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
                 <td><a href="/user/${user.id}">edit</a></td>
             </tr>
