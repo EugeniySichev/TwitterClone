@@ -1,17 +1,18 @@
 package com.example.TwitterClone.service;
 
-import com.example.TwitterClone.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.TwitterClone.repository.UserRepo;
+
 @Service
 public class UserService implements UserDetailsService {
-
-   @Autowired
-   private UserRepo userRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

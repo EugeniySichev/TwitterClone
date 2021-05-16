@@ -1,9 +1,9 @@
 package com.example.TwitterClone.controller;
 
 
-import com.example.TwitterClone.domain.Message;
-import com.example.TwitterClone.domain.User;
-import com.example.TwitterClone.repos.MessageRepo;
+//import com.example.sweater.demo.domain.Message;
+//import com.example.sweater.demo.domain.User;
+//import com.example.sweater.demo.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,15 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.TwitterClone.domain.Message;
+import com.example.TwitterClone.domain.User;
+//import com.example.TwitterClone.repos.MessageRepository;
+import com.example.TwitterClone.repository.MessageRepository;
+
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.UUID;
 
 @Controller
 public class MainController {
     @Autowired
-    private MessageRepo messageRepo;
+    private MessageRepository messageRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -34,12 +40,11 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Message> messages = messageRepo.findAll();
-
-        if (filter != null && !filter.isEmpty()) {
-            messages = messageRepo.findByTag(filter);
+        Iterable<Message> messages = messageRepository.findAll();
+        if (filter != null && !filter.isEmpty()){
+            messages = messageRepository.findByTag(filter);
         } else {
-            messages = messageRepo.findAll();
+            messages = messageRepository.findAll();
         }
 
         model.addAttribute("messages", messages);
@@ -47,20 +52,20 @@ public class MainController {
 
         return "main";
     }
-
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
-            @RequestParam String tag, Map<String, Object> model,
-            @RequestParam("file")MultipartFile file
+            @RequestParam String tag,
+            Map<String, Object> model,
+            @RequestParam("file") MultipartFile file
             ) throws IOException {
-        Message message = new Message(text, tag, user);
+        Message message = new Message(text,tag, user);
 
-        if(file != null && !file.getOriginalFilename().isEmpty()){
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
-            if(!uploadDir.exists()){
+            if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
 
@@ -71,15 +76,12 @@ public class MainController {
 
             message.setFilename(resultFilename);
         }
+        messageRepository.save(message);
 
-        messageRepo.save(message);
-
-        Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Message> messages = messageRepository.findAll();
 
         model.put("messages", messages);
 
         return "main";
     }
 }
-
-

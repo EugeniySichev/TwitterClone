@@ -1,19 +1,20 @@
 package com.example.TwitterClone.controller;
 
 
-import com.example.TwitterClone.domain.Role;
-import com.example.TwitterClone.domain.User;
-import com.example.TwitterClone.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.TwitterClone.domain.Role;
+import com.example.TwitterClone.domain.User;
+import com.example.TwitterClone.repository.UserRepo;
+
 import java.util.Collections;
 import java.util.Map;
 
 @Controller
-public class RegistrationController {
+public class registrationController {
     @Autowired
     private UserRepo userRepo;
 
