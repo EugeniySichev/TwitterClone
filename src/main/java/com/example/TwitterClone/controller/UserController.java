@@ -1,6 +1,9 @@
 package com.example.TwitterClone.controller;
 
 
+//import com.example.sweater.demo.domain.Role;
+//import com.example.sweater.demo.domain.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -62,3 +65,4 @@ public class UserController {
         return "redirect:/user";
     }
 }
+

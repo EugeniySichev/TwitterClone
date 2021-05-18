@@ -1,5 +1,6 @@
 package com.example.TwitterClone.repository;
 
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.TwitterClone.domain.Message;

@@ -1,9 +1,7 @@
 package com.example.TwitterClone.controller;
 
 
-//import com.example.sweater.demo.domain.Message;
-//import com.example.sweater.demo.domain.User;
-//import com.example.sweater.demo.repository.MessageRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.TwitterClone.domain.Message;
 import com.example.TwitterClone.domain.User;
-//import com.example.TwitterClone.repos.MessageRepository;
 import com.example.TwitterClone.repository.MessageRepository;
 
 import java.io.File;
